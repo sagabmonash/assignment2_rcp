@@ -1,0 +1,352 @@
+---
+title: "assignment_rcp.qmd"
+format: html
+editor: visual
+---
+
+# Written Guide of Knowledge on git, Github, and the Command Line Interface
+
+This is a written guide or tutorial that show my ability and understanding to use these tools (git, GitHub and the Command Line Interface) for version control and collaboration. This tutorial will describe each step that is taken and why.
+
+## 1. Create a new RStudio Project. In this folder, create a simple qmd file called `example.qmd` that can be knitted into a HTML file. Show the result of the knitted file.
+
+### Step 1: Create a new RStudio Project
+
+In R Studio, click `File` \> `New project` \> Fill out the Options. We can choose **`New Directory`** to start a project in a brand new working Directory. then we put fill our **Directory name** and browse for its subdirectory of in our computer.
+
+![](images/1.png){width="50%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+New Project
+:::
+
+![](images/2.png){width="50%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+Project Directory
+:::
+
+### Step 2: Create a new file Quarto Document
+
+Then we can select File \> New File \> Quarto Document... to create a qmd file then we save with save button to name it as \`example.qmd.
+
+![](images/7.png){width="50%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+Create new file
+:::
+
+### Step 3: Try to render as PDF
+
+We can render to pdf after specify the outpot format on YAML as format: pdf then use the blue arrow button **Render** at the top. (Note: rendering a PDF requires LaTex installed.)
+
+![](images/6.png){width="50%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+Render button
+:::
+
+## 2. From the command line interface, initialise this folder as a git repository and push it to the GitHub classroom repository.
+
+### Step 1: Initialize the Git Repository
+
+To begin, open up a terminal and move to where you want to place the project on your local machine using the cd (change directory) command. For example, if you have a `Assignment 2` folder on your desktop, you'd do something like:
+
+``` bash
+cd ",/path/to/your/project"
+```
+
+![](images/3.png){width="80%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+working directory
+:::
+
+To initialize a git repository in the root of the folder, run the `git init` command:
+
+``` bash
+git init
+```
+
+![](images/4.png){width="80%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+git init
+:::
+
+This command creates a new `.git` subdirectory in your current folder. This `.git` folder contains all the necessary metadata for Git to track changes in your repository. You'll see output similar to:
+
+![](images/5.png){width="80%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+initialized
+:::
+
+### Step 2: Add Your Files to the Repository
+
+Not all of our files should be added to git. For example, the .Rproj.user. folder should be left out. Create a new text file called .gitignore and add the pattern .Rproj.user/ to ignore. Test if this is working using `git status`
+
+a.  Add all of your project files to the staging area:
+
+``` bash
+git add .
+```
+
+b.  Commit the files to the repository with a descriptive message: bash
+
+``` bash
+git commit -m "Initial commit to add all of project files"
+```
+
+### Step 3: Set Up the Remote Repository
+
+a.  Go to GitHub and create a new repository. We can add it with a README, .gitignore, or license if we need it.
+
+![](images/8.png){width="80%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+create a new repository
+:::
+
+b.  Copy the URL of the new GitHub repository. Use the SSH link.
+
+![](images/9.png){width="80%" height="auto" fig-align="center"}
+
+::: {style="text-align: center;"}
+copy SSH link
+:::
+
+c.  In your terminal, add the remote repository URL to your local repository:
+
+``` bash
+git remote add origin git@github.com:your-username/your-repository.git
+```
+
+d.  Push your local repository to GitHub:
+
+``` bash
+git push -u origin main
+```
+
+You should now be able to see your repository on GitHub.
+
+## 3. Create a new branch called `testbranch`. Modify the file `example.qmd` and add the changes to both the local and remote repositories.
+
+### Step 1: Create a new branch locally
+
+In the terminal, make sure you’re inside your project folder:
+
+``` bash
+cd ",/path/to/your/project"
+```
+
+::: callout-tip
+### Tip
+
+Remember you can always check where you are by typing
+
+`pwd`
+:::
+
+Create and switch to a newly created branch `testbranch`:
+
+``` bash
+git branch testbranch
+git switch testbranch
+```
+
+::: callout-tip
+### Tip
+
+You can also do this in one command with
+
+git switch -c feature
+:::
+
+### Step 2: Modify the file `example.qmd`, Add the changes to both the local and remote repositories
+
+Open the `example.qmd` file in RStudio. Add the desired changes to the file such as modify existing text, add a code block or add a new section. For this example, you could add a new line on **the first line** such as:
+
+``` bash
+This is a change I made on the testbranch
+```
+
+Save the file.
+then add the modified `example.qmd` file to the staging area using the `git add` command and commit the change with a descriptive commit message using the `git commit` command:
+
+``` bash
+git add example.qmd
+git commit -m "Edit first line on testbranch"
+```
+Push the `testbranch` to your remote repository in GitHub using the using the `git push` command.  Since this is a new branch, you'll need to specify the -u flag to set up tracking:
+``` bash
+git push -u origin testbranch
+```
+::: callout-tip
+### FYI
+
+`origin` is the standard alias for your remote repository.
+
+`-u` (or `--set-upstream`) associates the local testbranch with the remote `testbranch`, so in the future, you can just use `git push` and `git pull` without specifying the branch.
+:::
+
+## 4. Create a folder called data, and add the data from Assignment 1 to that folder. Amend the previous commit to include the data folder. Push this amended commit to the remote.
+
+### Step 1: Create a folder data
+We can use the `mkdir` command to create a new folder. The `mkdir` command stands for "make directory"
+
+``` bash
+mkdir data
+```
+
+### Step 2: Add the data from Assignment 1 to the folder
+Then copy the data files from Assignment 1 into the `data` folder. We assume the data files are in a directory named.  `assignment1/data` You can adjust the path accordingly.
+``` bash
+cp /path/to/assignment1/data/*
+```
+::: callout-tip
+### FYI
+The cp command is used to copy files.  The * wildcard is used to copy all files from the assignment1_data directory.
+:::
+
+Next we use `git add` to stage the data folder
+``` bash
+git add .
+```
+### Step 3: Amend the previous commit
+We can use the `git commit --amend` command to modify the previous commit to include the `data` folder.
+``` bash
+git commit --amend -m "Modified example.qmd in testbranch and added data folder"
+```
+This will open a text editor in the terminal, allowing us to modify the commit message. We'll add "and added data folder" to the end of the existing commit message.  The `--amend` flag tells Git to modify the previous commit instead of creating a new one.
+
+### Step 4: Push the amended commit
+Since We've amended the commit, We need to use git push -f to force push the changes to the remote repository.  This is because we've changed the commit history, and Git needs to be told explicitly to overwrite the existing commit on the remote.
+```bash
+git push -f origin testbranch
+```
+::: callout-warning
+### Caution
+Force pushing can overwrite changes on the remote repository, so it should be used with caution, especially in collaborative projects.  It's generally recommended to avoid force pushing to shared branches unless you know exactly what you're doing.
+:::
+
+## 5. Switch back to the main branch and modify `example.qmd` in a different way such that it will conflict with `testbranch`. Commit and push these changes. 
+
+### Step 1: Switch back to the main branch, Modify `example.qmd` to make conflict with `testbranch` 
+A conflict occurs when two branches modify the same lines in a file, and Git doesn't know which changes to keep. We'll switch back to the `main` branch and modify `example.qmd` in a way that will conflict with the changes I made in `testbranch`.
+a. Switch to `main` branch
+
+``` bash
+git switch main
+```
+
+Open the example.qmd and change **the first line** also to:
+
+``` bash
+This is a change I made on the main, to make a conflicting change
+```
+
+Save the file, 
+
+### Step 2: Commit and push these changes
+We'll use the `git add` to stage the modified file and `git commit` to commit the changes.
+
+``` bash
+git add example.qmd
+git commit -m "Edit first line example.qmd on the main"
+```
+Then use `git push` to push the changes to the `main` branch.
+``` bash
+git push origin main
+```
+
+## 6. Merge the changes in `testbranch` onto `main`. Show the conflict and fixing the merge conflict. Push the changes to GitHub, showing the status and changes in GitHub.
+
+### Step 1: Merge the changes in `testbranch` onto `main`
+This will create a conflict that we'll need to resolve.  Merging is the process of combining changes from one branch into another.
+``` bash
+git merge testbranch
+```
+### Step 2: Show the conflict and fixing the merge conflict
+This will result in a merge conflict because both branches modified the same lines in `example.qmd`.  Git will show output indicating the conflict, and it will modify the `example.qmd` file to include markers indicating the conflicting changes. Git adds markers like `<<<<<<<`, `=======`, and `>>>>>>>` to show the conflicting areas. The conflict is like this
+
+
+
+Edit the file to keep the desired changes and delete the markers. 
+For example we keep the changes from `main` and delete the markers and save the file.
+
+
+
+### Step 3: Push the changes to GitHub, showing the status and changes in GitHub
+Then we use `git add` to stage the resolved `example.qmd`, Use git commit to commit the merge and push use `git push`
+``` bash
+git add example.qmd
+git commit -m "Resolved merge conflict between main and testbranch on the first line"
+git push origin main
+```
+View the main branch on GitHub to see the merged changes. The file will now reflect the resolved conflict.
+
+The commit history on GitHub will show the merge commit, clearly indicating that the changes from testbranch were merged into main.
+
+The diff of the merge commit will highlight the resolved conflicts, showing how the file was modified to reconcile the differences between the two branches.
+
+## 7. Tag this commit v1.0 on `main` using an annotated tag.
+Now we'll tag the current commit on main as v1.0.  Tagging allows us to mark specific points in the commit history, such as releases.  This makes it easy to refer to important versions of your project.
+
+### Step 1: Create tag
+Use `git tag -a` to create an annotated tag.  Annotated tags include a message, which is good practice for providing context.
+``` bash
+git tag -a v1.0 -m "Version 1.0 release"
+```
+
+### Step 2: Push tag
+Use git push --tags to push the tag to the remote repository.  By default, git push does not push tags, so you need to use the --tags option.
+``` bash
+git push origin --tags
+```
+
+## 8. Delete branch `testbranch` locally and on the remote.
+We can delete testbranch locally and remotely.  Deleting branches that are no longer needed helps to keep our repository clean and organized.
+a. Delete local branch with command `git branch -d`
+``` bash
+git branch -d testbranch
+```
+b. Delete remote branch with command `git push origin --delete`
+``` bash
+git push origin --delete testbranch
+```
+
+## 9. Show the commit log in condensed form in the terminal.
+The commit log is a record of all the changes that have been made to the repository. We use `git log --oneline`.  The `--oneline` option displays each commit in a single line, making it easier to scan the history.
+``` bash
+git log --oneline
+```
+
+## 10. On main, create a new section in `example.qmd` that includes an easy to make plot. Commit the changes, and demonstrate using the command line interface how to undo the commit *without* losing your local changes.
+
+### Step 1: Modifying `example.qmd`
+```markdown
+## A Newly created Plot
+
+Here's a new plot created with R:
+
+r
+plot(1:10, main = "My Plot")
+```
+
+Save file, then add using `git add` and commit use `git commit`
+```bash
+git add example.qmd
+git commit -m "Added a plot section to example.qmd"
+```
+
+### Step 2: Undo commit
+Use `git reset --soft HEAD~1` to move the main branch back one commit, effectively undoing the last commit.  The `HEAD` is a pointer to the current commit, and `HEAD~1` refers to the commit before the current one.  
+This command does not delete your changes; it only removes the commit from the repository's history.  The changes are left unstaged in your working directory.
+```bash
+git reset HEAD~1
+```
+Then we can use `git status` to show the changes to `example.qmd` are still present but unstaged
+```bash
+git status
+```
